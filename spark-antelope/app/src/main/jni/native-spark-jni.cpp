@@ -45,7 +45,13 @@
 #endif
 
 static ANativeWindow* mNativeWindow;
-int mState; // 0-Stop 1-Running
+
+typedef enum {
+	SPARK_IDLE,
+	SPARK_RUNNING,
+	SPRAK_STOPPING,
+} spark_state;
+spark_state mState = SPARK_IDLE;
 
 static void setVideoSurface(JNIEnv *env, jobject thiz, jobject jsurface) {
 	LOGD("Set video surface");
@@ -76,10 +82,10 @@ static int startSpark(JNIEnv *env, jobject clazz, jstring jcomment, int jcode) {
 	ANativeWindow_setBuffersGeometry(mNativeWindow, w, h, WINDOW_FORMAT_RGBA_8888);
 	ANativeWindow_Buffer buffer;
 	int lockResult = -1;
-	mState = 1;
+	mState = SPARK_RUNNING;
 
 	fill_truecolor_rgba_buffer(w, h, (void *)img);
-	while (mState) {
+	while (mState == SPARK_RUNNING) {
 		lockResult = ANativeWindow_lock(mNativeWindow, &buffer, NULL);
 		if (lockResult == 0) {
 			memcpy(buffer.bits, img, w * h * 4);
@@ -87,15 +93,22 @@ static int startSpark(JNIEnv *env, jobject clazz, jstring jcomment, int jcode) {
 		}
 		sleep(1);
 	}
+	mState = SPARK_IDLE;
 	free(mNativeWindow);
 
 	return 1;
 }
 
 static int stopSpark(JNIEnv *env, jobject clazz, int jcode) {
-	LOGD("Stop Spark");
-	mState = 0;
-	sleep(3);
+	LOGD("Stop spark...");
+	mState = SPRAK_STOPPING;
+	while (mState == SPRAK_STOPPING) {
+		sleep(1);
+		if(mState == SPARK_IDLE) {
+			LOGI("Stop spark antelope done");
+			break;
+		}
+	}
 
 	if (mNativeWindow != NULL) {
 		ANativeWindow_release(mNativeWindow);

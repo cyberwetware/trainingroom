@@ -1,6 +1,6 @@
 
 /* Fill true-color graphic buffer */
-void void fill_truecolor_rgba_buffer(int w, int h, void *out)
+void fill_truecolor_rgba_buffer(int w, int h, void *out)
 {
 
 	unsigned int *p = (unsigned int *)out;
