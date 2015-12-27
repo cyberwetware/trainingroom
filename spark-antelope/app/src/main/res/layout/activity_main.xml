@@ -9,8 +9,36 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.example.android.sparkantelope.MainActivity">
 
-    <TextView
+    <SurfaceView
+        android:id="@+id/surface"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/button_start"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Spark Antelope !!!" />
+        android:text="Start Play"
+        android:id="@+id/button_start"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="45dp"
+        android:layout_marginStart="45dp" />
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Stop Play"
+        android:id="@+id/button_stop"
+        android:layout_below="@+id/surface"
+        android:layout_toRightOf="@+id/button_start"
+        android:layout_toEndOf="@+id/button_start"
+        android:layout_marginLeft="45dp"
+        android:layout_marginStart="45dp" />
+
 </RelativeLayout>
