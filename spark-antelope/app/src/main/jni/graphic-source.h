@@ -5,6 +5,6 @@
 #ifndef SPARK_ANTELOPE_GRAPHIC_SOURCE_H
 #define SPARK_ANTELOPE_GRAPHIC_SOURCE_H
 
-void set_graphic_buffer(int w, int h, void *out);
+void fill_truecolor_rgba_buffer(int w, int h, void *out);
 
 #endif //SPARK_ANTELOPE_GRAPHIC_SOURCE_H

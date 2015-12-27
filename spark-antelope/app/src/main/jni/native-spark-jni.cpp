@@ -78,7 +78,7 @@ static int startSpark(JNIEnv *env, jobject clazz, jstring jcomment, int jcode) {
 	int lockResult = -1;
 	mState = 1;
 
-	set_graphic_buffer(w, h, (void *)img);
+	fill_truecolor_rgba_buffer(w, h, (void *)img);
 	while (mState) {
 		lockResult = ANativeWindow_lock(mNativeWindow, &buffer, NULL);
 		if (lockResult == 0) {
