@@ -15,7 +15,6 @@ public class MainActivity extends AppCompatActivity {
     private final static String TAG = "MainActivity";
     private final String targetMac = "34:cd:be:1f:e5:09";
 
-    private TextView iPTextView = null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,9 +24,14 @@ public class MainActivity extends AppCompatActivity {
 
 
         String ipAddress = Utils.getIPFromMac(targetMac);
-//        iPTextView = new TextView(this);
-//        iPTextView.setText(ipAddress);
         Log.i(TAG, "Ip address " + ipAddress);
+        TextView textViewIP = (TextView)findViewById(R.id.textView_ip);
+        textViewIP.setText("IP address " + ipAddress + " from MAC " + targetMac);
+
+        String macAddress = Utils.getLocalMacAddress(this);
+        Log.i(TAG, "Mac address" + macAddress);
+        TextView textViewMac = (TextView)findViewById(R.id.textView_mac);
+        textViewMac.setText("Local MAC address: " + macAddress);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
