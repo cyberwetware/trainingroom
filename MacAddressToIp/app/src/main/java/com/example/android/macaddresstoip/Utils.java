@@ -9,6 +9,9 @@ import java.net.NetworkInterface;
 import java.net.SocketException;
 import java.util.Enumeration;
 
+import android.content.Context;
+import android.net.wifi.WifiInfo;
+import android.net.wifi.WifiManager;
 import android.util.Log;
 
 public class Utils {
@@ -104,5 +107,15 @@ public class Utils {
             ipAddrStr += ipAddr[i]&0xFF;
         }
         return ipAddrStr;
+    }
+
+    public static String getLocalMacAddress(Context context) {
+        String macAddress = "";
+        WifiManager wifiManager = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
+        WifiInfo wifiInfo = wifiManager.getConnectionInfo();
+        macAddress = wifiInfo.getMacAddress();
+        Log.i(TAG, "Local mac address: " + macAddress);
+
+        return macAddress;
     }
 }
