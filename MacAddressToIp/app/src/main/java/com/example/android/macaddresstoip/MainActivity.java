@@ -35,15 +35,6 @@ public class MainActivity extends AppCompatActivity {
         Log.i(TAG, "Mac address" + macAddress);
         TextView textViewMac = (TextView)findViewById(R.id.textView_mac);
         textViewMac.setText("Local MAC address: " + macAddress);
-
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
     }
 
     @Override
